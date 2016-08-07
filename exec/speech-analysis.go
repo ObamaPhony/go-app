@@ -4,13 +4,13 @@ import (
 	//	log "github.com/inconshreveable/log15"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"gopkg.in/pipe.v2"
 	"io"
 	"os"
 	"time"
 )
 
-type SAArguments struct {
 type SA_Arguments struct {
 	FileOUTPATH string
 	SAScriptLOC string
