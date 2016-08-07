@@ -19,42 +19,41 @@ type SAArguments struct {
 
 // SAReturnASYS takes the SAArguments struct, and returns the analysis from the speech analysis program
 func SAReturnASYS(a *SAArguments) (errresult error, result string) {
+func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
+	buffer := new(bytes.Buffer)
+	filename := fmt.Sprintf("%s/speechoutput_%s.json", a.FileOUTPATH,
+		time.Now().Format(time.RFC3339))
 
-	if a.FileOUT == true {
-		// We're outputting this to a file.
-		// Create new bytes.Buffer instance
-		BUFFER := new(bytes.Buffer)
-		// Define the filename to output to.
-		FILENAME := a.FileOUTPATH + "/" + "speechoutput_" + time.Now().Format(time.RFC3339) + ".json"
+	file, err := os.Create(filename)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
 
-		// Create the output file.
-		file, err := os.Create(FILENAME)
-		if err != nil {
-			return err, ""
-		}
-		defer file.Close()
+	pi := pipe.Line(
+		pipe.Read(a.SpeechREQ),
+		pipe.Exec(a.SAScriptLOC),
+		pipe.Tee(buffer),
+	)
 
-		// Prepare the speech-analysis script pipe.
-		p := pipe.Line(
-			pipe.Read(a.SpeechREQ),
-			pipe.Exec(a.SAScriptLOC),
-			pipe.Tee(BUFFER),
-		)
-
-		err = pipe.Run(p)
-
-		if err != nil {
-			return err, ""
-		}
-
-		outputBytes := &bytes.Buffer{}
-		if err := json.Compact(outputBytes, BUFFER.Bytes()); err != nil {
-			panic(err)
-		}
-
-		return nil, outputBytes.String()
+	err = pipe.Run(pi)
+	if err != nil {
+		return "", err
 	}
 
-	return nil, ""
+	output := &bytes.Buffer{}
+	if err := json.Compact(output, buffer.Bytes()); err != nil {
+		return "", err
+	}
+
+	return output.String(), nil
+
+}
+
+	if a.FileOUT == true {
+		result, err := returnSpeechAnalysis(a)
+	}
+
+	return result, err
 
 }
