@@ -53,13 +53,10 @@ func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 // from the speech analysis program
 func SAReturnASYS(a *SA_Arguments) (result string, err error) {
 
-	result = ""
-	err = nil
-
 	if a.FileOUT == true {
-		result, err = returnSpeechAnalysis(a)
+		result, err := returnSpeechAnalysis(a)
+		return result, err
 	}
 
-	return result, err
-
+	return "", nil
 }
