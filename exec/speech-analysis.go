@@ -11,14 +11,13 @@ import (
 )
 
 type SAArguments struct {
+type SA_Arguments struct {
 	FileOUTPATH string
 	SAScriptLOC string
 	FileOUT     bool
 	SpeechREQ   io.ReadCloser
 }
 
-// SAReturnASYS takes the SAArguments struct, and returns the analysis from the speech analysis program
-func SAReturnASYS(a *SAArguments) (errresult error, result string) {
 func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 	buffer := new(bytes.Buffer)
 	filename := fmt.Sprintf("%s/speechoutput_%s.json", a.FileOUTPATH,
