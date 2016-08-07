@@ -50,8 +50,15 @@ func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 
 }
 
+// SAReturnASYS takes the SA_Arguments struct, and returns the analysis
+// from the speech analysis program
+func SAReturnASYS(a *SA_Arguments) (result string, err error) {
+
+	result = ""
+	err = nil
+
 	if a.FileOUT == true {
-		result, err := returnSpeechAnalysis(a)
+		result, err = returnSpeechAnalysis(a)
 	}
 
 	return result, err
