@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"gopkg.in/pipe.v2"
 	"io"
+	"io/ioutil"
 	"os"
 	"time"
 )
@@ -20,7 +21,13 @@ type SA_Arguments struct {
 
 func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 	buffer := new(bytes.Buffer)
-	filename := fmt.Sprintf("%s/speechoutput_%s.json", a.FileOUTPATH,
+	tempdir, err := ioutil.TempDir("", "speechoutput_")
+	if err != nil {
+		return "", err
+	}
+
+	filename := fmt.Sprintf("%s/speechoutput_%s.json",
+		tempdir,
 		time.Now().Format(time.RFC3339))
 
 	file, err := os.Create(filename)
