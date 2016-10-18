@@ -52,5 +52,4 @@ func main() {
 	log.Info("*** ObamaPhony REST API Version 0.1.0 loaded ***")
 
 	controllers.Server()
-
 }
