@@ -7,8 +7,7 @@
     },
     "listener": {
         "http": {
-            "bindPort": 8080,
-            "bindAddress": "0.0.0.0"
+            "bindAddress": "0.0.0.0:8080"
         }
     }
 }
