@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io/ioutil"
 	"os"
 
@@ -12,24 +13,24 @@ import (
 var config *gabs.Container
 
 func init() {
-	/* Initialise configuration instance, w/ GABS. */
+	/* Setup flags */
+	configPath := flag.String("configPath", "", "Path to configuration file")
+	flag.Parse()
 
+	/* Initialise configuration instance, w/ GABS. */
 	log.Debug("Initialise configuration instance")
 
-	// This has to be a absolute path.
-	configurationPath := os.Getenv("RESTAPI_CONFIG")
-
-	/* Ascertain if the configuration path is input. */
-
+	/* Ascertain if the configuration path has been inputted. */
 	log.Debug("Testing if the configuration path is inputted.")
-	if _, err := os.Stat(configurationPath); os.IsNotExist(err) {
+
+	if _, err := os.Stat(*configPath); os.IsNotExist(err) {
 		log.Crit("The configuration file does not exist!",
-			log.Ctx{"File": configurationPath})
+			log.Ctx{"File": *configPath})
 		os.Exit(1)
 	}
 
 	log.Debug("Reading configuration file into RAM.")
-	configurationFile, err := ioutil.ReadFile(configurationPath)
+	configFile, err := ioutil.ReadFile(*configPath)
 	if err != nil {
 		log.Error("The JSON config could not be loaded..",
 			log.Ctx{"Error": err.Error()})
@@ -37,7 +38,7 @@ func init() {
 	}
 
 	log.Debug("Parsing configuration file into a GABS instance.")
-	config, err = gabs.ParseJSON(configurationFile)
+	config, err = gabs.ParseJSON(configFile)
 	if err != nil {
 		log.Error("The JSON config could not be parsed.",
 			log.Ctx{"Error": err.Error()})
