@@ -1,6 +1,0 @@
-package: github.com/obamaphony/rest-api
-import:
-- package: github.com/inconshreveable/log15
-- package: github.com/jeffail/gabs
-- package: github.com/julienschmidt/httprouter
-- package: gopkg.in/pipe.v2
