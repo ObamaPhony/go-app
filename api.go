@@ -49,9 +49,10 @@ func init() {
 }
 
 func main() {
-
 	log.Info("Initialising ObamaPhony REST API..")
 	log.Info("*** ObamaPhony REST API Version 0.1.0 loaded ***")
 
-	controllers.Server()
+	bindAddr := config.Path("listener.http.bindAddress").Data().(string)
+
+	controllers.Server(bindAddr)
 }
