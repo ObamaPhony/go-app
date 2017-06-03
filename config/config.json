@@ -1,15 +1,14 @@
 {
-    "version": "0.1.0",
     "speech-generator": {
-        "basePath": "/path/to/speech-generator"
+        "scriptPath": "../speech-generator/speech-generator.py"
     },
     "speech-analysis": {
-        "basePath": "/path/to/speech-analysis"
+        "scriptPath": "../speech-analysis/analyse-speeches.py"
     },
     "listener": {
         "http": {
-            "port": 8080,
-            "bind": "0.0.0.0"
+            "bindPort": 8080,
+            "bindAddress": "0.0.0.0"
         }
     }
 }
