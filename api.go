@@ -1,11 +1,12 @@
 package main
 
 import (
+	"io/ioutil"
+	"os"
+
 	log "github.com/inconshreveable/log15"
 	"github.com/jeffail/gabs"
 	"github.com/obamaphony/rest-api/controllers"
-	"io/ioutil"
-	"os"
 )
 
 var config *gabs.Container
@@ -18,7 +19,7 @@ func init() {
 	// This has to be a absolute path.
 	configurationPath := os.Getenv("RESTAPI_CONFIG")
 
-	// Ascertain if the configuration path is inputted.
+	/* Ascertain if the configuration path is input. */
 
 	log.Debug("Testing if the configuration path is inputted.")
 	if _, err := os.Stat(configurationPath); os.IsNotExist(err) {
