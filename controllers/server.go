@@ -11,9 +11,9 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "Welcome.\n")
 }
 
-func Server() {
+func Server(bindInter string) {
 	router := httprouter.New()
 	router.GET("/", Index)
 
-	http.ListenAndServe(":8080", router)
+	http.ListenAndServe(bindInter, router)
 }
