@@ -1,5 +1,8 @@
-# TODO list for rest-api
-
-## TODO Plan out the routes the API will serve
-
-## TODO Develop the 'exec' package for IPC
+- Flags.
+- JSON configuration file.
+- Depdendency management - Go Modules. <- DONE.
+- Dockerfile for API. <- DONE.
+- No path necessary for analysis/generator. We can just use symlinks.
+- Plan out routes for API to serve.
+- Allow main HTTP server to call API.
+- Finish `exec` package.
