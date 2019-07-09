@@ -1,26 +1,31 @@
 package exec
 
 import (
-	//	log "github.com/inconshreveable/log15"
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/pipe.v2"
+
 	"io"
 	"io/ioutil"
 	"os"
 	"time"
+
+	log "github.com/inconshreveable/log15"
+
+	pipe "gopkg.in/pipe.v2"
 )
 
-type SA_Arguments struct {
+type SAArguments struct {
 	FileOUTPATH string
 	SAScriptLOC string
 	FileOUT     bool
 	SpeechREQ   io.ReadCloser
 }
 
-func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
+func returnSpeechAnalysis(a *SAArguments) (result string, err error) {
+	log.Debug("New bytes buffer created!")
 	buffer := new(bytes.Buffer)
+
 	tempdir, err := ioutil.TempDir("", "speechoutput_")
 	if err != nil {
 		return "", err
@@ -31,10 +36,10 @@ func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 		time.Now().Format(time.RFC3339))
 
 	file, err := os.Create(filename)
+	defer file.Close()
 	if err != nil {
 		return "", err
 	}
-	defer file.Close()
 
 	pi := pipe.Line(
 		pipe.Read(a.SpeechREQ),
@@ -56,10 +61,9 @@ func returnSpeechAnalysis(a *SA_Arguments) (result string, err error) {
 
 }
 
-// SAReturnASYS takes the SA_Arguments struct, and returns the analysis
+// SAReturnASYS takes the SAArguments struct, and returns the analysis
 // from the speech analysis program
-func SAReturnASYS(a *SA_Arguments) (result string, err error) {
-
+func SAReturnASYS(a *SAArguments) (result string, err error) {
 	if a.FileOUT == true {
 		result, err := returnSpeechAnalysis(a)
 		return result, err
