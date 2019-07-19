@@ -1,4 +1,4 @@
-package main
+package main // import "git.shymega.org.uk/obamaphony/rest-api"
 
 import (
 	"flag"
