@@ -1,6 +1,6 @@
 module git.shymega.org.uk/obamaphony/rest-api
 
-go 1.12
+go 1.14
 
 require (
 	github.com/go-stack/stack v1.8.0 // indirect
