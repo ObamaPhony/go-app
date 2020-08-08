@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
