@@ -10,7 +10,7 @@ import (
 func handleRoot(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("X-Application", "ObamaPhony")
 	w.Header().Add("Content-Type", "application/json; charset=utf-8")
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
 
 	fmt.Fprintf(w, "{\"result\": \"PONG\"}")
 }
