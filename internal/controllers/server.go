@@ -1,23 +1,15 @@
 package controllers
 
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
+    "github.com/obamaphony/go-app/internal/models"
 )
 
-func handleRoot(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("X-Application", "ObamaPhony")
-	w.Header().Add("Content-Type", "application/json; charset=utf-8")
-	w.WriteHeader(http.StatusOK)
-
-	fmt.Fprintf(w, "{\"result\": \"PONG\"}\n")
+func handleRoot(c *gin.Context) {
+	c.Status(404)
 }
 
-func Server(bindInter string) {
-	r := mux.NewRouter()
-	r.HandleFunc("/", handleRoot).Methods("GET")
-
-	http.ListenAndServe(bindInter, r)
+func Server(bindInterface string) {
+	r := gin.Default()
+	r.GET("/", handleRoot)
 }
