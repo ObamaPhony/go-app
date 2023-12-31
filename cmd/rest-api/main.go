@@ -10,22 +10,26 @@ import (
 	log "github.com/inconshreveable/log15"
 )
 
-var configPath string
+var (
+	configPath string
+	bindAddr   string
+)
+
+const defaultConfigPath string = "./config.json"
 
 func init() {
 	log.Info("Initialising ObamaPhony REST API..")
 
 	/* Setup flags */
-	flag.StringVar(&configPath, "configPath",
-		"./config.json",
-		"Path to configuration file")
+	flag.StringVar(&configPath, "config",
+		defaultConfigPath, "Path to configuration file")
 	flag.Parse()
 }
 
 func main() {
 	cfg := config.LoadConfig(configPath)
 
-	bindAddr := fmt.Sprintf("%s:%d",
+	bindAddr = fmt.Sprintf("%s:%d",
 		cfg.Listener.HTTP.BindAddress,
 		cfg.Listener.HTTP.BindPort)
 
