@@ -1,4 +1,4 @@
-package main // import "github.com/obamaphony/go-app"
+package main // import "github.com/obamaphony/go-app/cmd/app"
 
 import (
 	"flag"
