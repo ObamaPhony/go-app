@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/go-stack/stack v1.8.0 // indirect
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/inconshreveable/log15 v3.0.0-testing.5+incompatible
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
