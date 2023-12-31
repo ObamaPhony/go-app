@@ -1,11 +1,11 @@
-package main // import "git.shymega.org.uk/obamaphony/rest-api"
+package main // import "github.com/obamaphony/go-app"
 
 import (
 	"flag"
 	"fmt"
 
-	config "git.shymega.org.uk/obamaphony/rest-api/internal/config"
-	controllers "git.shymega.org.uk/obamaphony/rest-api/internal/controllers"
+	config "github.com/obamaphony/go-app/internal/config"
+	controllers "github.com/obamaphony/go-app/internal/controllers"
 
 	log "github.com/inconshreveable/log15"
 )
